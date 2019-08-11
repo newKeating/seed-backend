@@ -1,0 +1,186 @@
+type User {
+  id: ID!
+  firebaseId: String!
+  facebookId: String
+  email: String!
+  name: String!
+  password: String
+  sex: Sex!
+  phoneNumber: String!
+  verifiedPhoneNumber: Boolean!
+  birthDate: String!
+  age: Int!
+  profilePhoto: String
+  description: String
+  minimumCredit: Int!
+  deleted: Boolean!
+  interests: [Interest!]!
+  likes: [UserLike!]
+  likeCount: Int!
+  myUserLikes: [UserLike!]
+  myQuestionLikes: [QuestionLike!]
+  myAnswerLikes: [AnswerLike!]
+  createdQuestions: [Question!]
+  createdAnswers: [Answer!]
+  sentRequests: [Request!]
+  receivedRequests: [Request!]
+  createdPosts: [Post!]
+  createdComments: [Comment!]
+  createdAt: String!
+  updatedAt: String!
+  payment: Payment!
+}
+
+type UserLike {
+  id: ID!
+  user: User!
+  likedUser: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type QuestionLike {
+  id: ID!
+  user: User!
+  questionId: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type AnswerLike {
+  id: ID!
+  user: User!
+  answerId: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+enum InterestField {
+  SPORT
+  ENGLISH
+  CHINESE
+  COOKING
+  DEVELOPMENT
+  MARKETING
+  LOVE_RELATIONSHIP
+  WINE
+  BEER
+}
+
+type Interest {
+  id: ID!
+  field: InterestField!
+  users: [User!]
+  questions: [Question!]
+  requests: [Request!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Question {
+  id: ID!
+  category: Interest!
+  title: String!
+  content: String!
+  creditOn: Int!
+  imgUrl: String
+  questioner: User!
+  answers: [Answer!]
+  likes: [User!]
+  likeCount: Int!
+  ended: Boolean!
+  leftDays: Int!
+  endDate: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Answer {
+  id: ID!
+  title: String!
+  content: String!
+  selected: Boolean!
+  imgUrl: String
+  answerer: User!
+  question: Question!
+  likes: [User!]
+  likeCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Request {
+  id: ID!
+  sender: User!
+  receiver: User!
+  category: Interest!
+  title: String!
+  content: String!
+  creditOn: Int!
+  imgUrl: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  comments: [Comment!]
+  commentCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  user: User!
+  post: Post!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Payment {
+  id: ID!
+  emoney: Int!
+  paymentHistories: [PaymentHistory!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+enum PaymentType {
+  CHARGE
+  CHARGE_CANCEL
+}
+
+enum PaymentMethodType {
+  CARD
+}
+
+type PaymentHistory {
+  id: ID!
+  user: User!
+  type: PaymentType!
+  emoney: Int!
+  impUid: String
+  receiptUrl: String
+  payMethod: PaymentMethodType
+  paidAt: String
+  paymentHistorySubs: [PaymentHistorySub!]
+  createdAt: String!
+}
+
+type PaymentHistorySub {
+  id: ID!
+  type: PaymentType!
+  emoney: Int!
+  paymentHistory: PaymentHistory!
+  createdAt: String
+}
