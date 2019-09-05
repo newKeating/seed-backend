@@ -29,20 +29,20 @@ export const sendMail = email => {
 
 export const sendSecretMail = (address, secret) => {
   const email = {
-    from: "krotis09@gmail.com",
+    from: "___@gmail.com",
     to: address,
-    subject: "Jamong-Sound 로그인 시크릿 🔒",
-    html: `안녕하세요. 자몽사운드의 로그인 시크릿입니다. <strong>${secret}</strong>.<br/>복사하여서 아래의 링크로 입력해주세요.`
+    subject: "__ 로그인 시크릿 🔒",
+    html: `안녕하세요. ____의 로그인 시크릿입니다. <strong>${secret}</strong>.<br/>복사하여서 아래의 링크로 입력해주세요.`
   };
   return sendMail(email);
 };
 
 export const sendPasswordResetMail = (address, username, userId, secret) => {
   const email = {
-    from: "krotis09@gmail.com",
+    from: "___@gmail.com",
     to: address,
-    subject: "사운드팔레트(Sound-Palette)의 비밀번호 변경 메일입니다.",
-    html: `사운드팔레트(Sound-Palette) 사이트의 아이디 "${username}"의 비밀번호 변경 요청에 의한 메일입니다.<br/> <a href="localhost:3000/password-reset/:${userId}/:${secret}"><strong>비밀번호 변경 링크</strong></a>.<br/> 위의 링크를 클릭하여 새로운 비밀번호로 변경하시기 바랍니다.`
+    subject: "____의 비밀번호 변경 메일입니다.",
+    html: `____ 사이트의 아이디 "${username}"의 비밀번호 변경 요청에 의한 메일입니다.<br/> <a href="localhost:3000/password-reset/:${userId}/:${secret}"><strong>비밀번호 변경 링크</strong></a>.<br/> 위의 링크를 클릭하여 새로운 비밀번호로 변경하시기 바랍니다.`
   };
   return sendMail(email);
 };

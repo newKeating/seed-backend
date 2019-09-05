@@ -3,14 +3,11 @@ import { Storage } from "@google-cloud/storage";
 import path from "path";
 
 const gc = new Storage({
-  keyFilename: path.join(
-    __dirname,
-    "../lunchwit-temp-7af16438c083-working.json"
-  ),
-  projectId: "lunchwit-temp"
+  keyFilename: path.join(__dirname, "../__.json"),
+  projectId: "__"
 });
 
-const bucket = gc.bucket("lunch_wit_talent_storage");
+const bucket = gc.bucket("_storage");
 
 // const upload = multer({ dest: "uploads/" });
 const upload = multer({
@@ -37,9 +34,7 @@ export const uploadController = async (req, res) => {
 
   uploadStream.on("finish", () => {
     // The public URL can be used to access the file via HTTP.
-    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${
-      fileUpload.name
-    }`;
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
 
     // Make the image public to the web
     fileUpload
