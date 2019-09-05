@@ -4,7 +4,6 @@ import {
   CreateRegularUserResponse
 } from "../../../types/graph";
 import User from "../../../entities/User";
-import Interest from "../../../entities/Interest";
 import { generateToken } from "../../../utils";
 const resolvers: Resolvers = {
   Mutation: {
@@ -12,16 +11,7 @@ const resolvers: Resolvers = {
       _,
       args: CreateRegularUserMutationArgs
     ): Promise<CreateRegularUserResponse> => {
-      const {
-        // firebaseId,
-        email,
-        password,
-        name,
-        phoneNumber,
-        interests,
-        // birthDate,
-        sex
-      } = args;
+      const { email, password, name } = args;
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -31,32 +21,15 @@ const resolvers: Resolvers = {
             token: null
           };
         }
-        const interestFields = interests.map(interest => {
-          return {
-            field: interest
-          };
-        });
-        const interestsFromDB = await Interest.find({
-          where: interestFields,
-          relations: ["users"]
-        });
-
-        // console.log("interestsFromDB", interestsFromDB);
 
         const newUser = await User.create({
           // firebaseId,
           email,
           password,
-          name,
-          phoneNumber,
-          // birthDate,
-          sex
+          name
         }).save();
         console.log("newUser", newUser);
-        await interestsFromDB.forEach(async interest => {
-          await interest.users.push(newUser);
-          await interest.save();
-        });
+
         const token = generateToken(newUser.id);
         return {
           ok: true,

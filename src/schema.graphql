@@ -1,0 +1,25 @@
+type User {
+  id: ID!
+  facebookId: String
+  email: String!
+  name: String!
+  password: String
+  deleted: Boolean!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Mutation {
+  createRegularUser(email: String!, password: String!, name: String!): CreateRegularUserResponse!
+}
+
+type CreateRegularUserResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Query {
+  fetchUser(id: String!): User!
+  me: User!
+}

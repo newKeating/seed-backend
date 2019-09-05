@@ -1,13 +1,8 @@
 type Mutation {
   createRegularUser(
-    firebaseId: String
     email: String!
     password: String!
     name: String!
-    phoneNumber: String!
-    interests: [InterestField!]!
-    birthDate: String
-    sex: Sex!
   ): CreateRegularUserResponse!
 }
 
